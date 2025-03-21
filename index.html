@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Vibes</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #190019;
+            background-image: url(img/Background_img1.svg);
+            background-attachment: fixed;
+            background-size: cover;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0;
+            text-align: center;
+        }
+        
+        /* Header and Navbar Styles */
+        header {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #e60073;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            margin-left: 10px;
+        }
+        
+        .reload-btn {
+            background: linear-gradient(45deg, #FF5722, #e74c3c);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .reload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-message {
+            font-family: 'Dancing Script', cursive;
+            margin-top: 10px;
+            color: #e60073;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        /* Updated Container Styles */
+        .container {
+            max-width: 600px; /* Increased from 500px */
+            width: 90%; /* Changed from 100% for better responsiveness */
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px; /* Increased padding */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin: 20px auto; /* Centered container */
+            transition: all 0.3s ease; /* Smooth resizing */
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%);
+            z-index: -1;
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #e60073;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .gif-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .gif-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 30px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #e60073;
+            line-height: 1.5;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 12px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            position: relative;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .yes-btn {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            color: white;
+        }
+        
+        .no-btn {
+            background: linear-gradient(45deg, #e74c3c, #FF5722);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .moving-button {
+            position: fixed !important;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) !important;
+            animation: pulse 1.5s infinite;
+            z-index: 1000;
+        }
+        
+        /* Quote Section */
+        .quote-container {
+            max-width: 600px; /* Match main container */
+            width: 90%; /* Same as main container */
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        
+        .quote {
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+            padding: 10px;
+            border-left: 3px solid #e60073;
+            background: rgba(255,255,255,0.5);
+            border-radius: 0 10px 10px 0;
+            text-align: left;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+            }
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #e9336b;
+            animation: fall 3s linear forwards;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .sticker {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            z-index: 5;
+        }
+        
+        .sticker-1 {
+            top: -20px;
+            right: -20px;
+            transform: rotate(15deg);
+            font-size: 50px;
+        }
+        
+        .sticker-2 {
+            bottom: -20px;
+            left: -20px;
+            transform: rotate(-15deg);
+            font-size: 50px;
+        }
+        
+        .sticker-3 {
+            top: 20%;
+            right: -15px;
+            font-size: 30px;
+        }
+        
+        .sticker-4 {
+            bottom: 25%;
+            left: -15px;
+            font-size: 30px;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        .floating-delay {
+            animation: floating 3s ease-in-out 1.5s infinite;
+        }
+        
+        @keyframes floating {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        /* Floating hearts in the background */
+        .bg-heart {
+            position: fixed;
+            font-size: 30px;
+            color: rgba(233, 51, 107, 0.3);
+            animation: float-bg 15s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes float-bg {
+            0% {
+                transform: translateY(100vh) translateX(0);
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+            }
+        }
+        
+        /* Media Query Adjustments */
+        @media (max-width: 600px) {
+            .container, .quote-container {
+                width: 95%; /* More screen utilization on mobile */
+                padding: 25px; /* Slightly reduced padding */
+            }
+            
+            .title {
+                font-size: 32px; /* Slightly larger than before */
+            }
+            
+            .message {
+                font-size: 26px; /* Slightly larger than before */
+            }
+            
+            .buttons {
+                gap: 15px;
+            }
+            
+            button {
+                padding: 10px 25px;
+                font-size: 16px;
+            }
+            
+            .sticker {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .header-message {
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 700px; /* Larger container for big screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navbar -->
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo">
+                ❤️ <span>Love Vibes</span>
+            </a>
+            <button class="reload-btn" id="reloadBtn">TryAgain↻</button>
+        </div>
+        <div class="header-message">Hi, Cutee One Message for You ❤️</div>
+    </header>
+    
+    <!-- Create floating background hearts -->
+    <div id="bgHearts"></div>
+    
+    <div class="main-content">
+        <div class="container">
+            <h1 class="title">❤️ Love Vibes ❤️</h1>
+            
+            <!-- Stickers/Emojis -->
+            <div class="sticker sticker-1 floating"> 💖</div>
+            <div class="sticker sticker-2 floating-delay">💞</div>
+            <div class="sticker sticker-3 floating">💘</div>
+            <div class="sticker sticker-4 floating-delay">💓</div>
+            
+            <div class="gif-container">
+                <img id="loveGif" src="img/gif_1.gif" alt="Love GIF">
+            </div>
+            
+            <p class="message" id="message">Do you love me? 💝</p>
+            
+            <div class="buttons">
+                <button class="yes-btn" id="yesBtn">Yes 💖</button>
+                <button class="no-btn" id="noBtn">No 💔</button>
+            </div>
+        </div>
+        
+        <!-- Quote Section -->
+        <div class="quote-container">
+            <div id="quoteBox" class="quote">
+                "In all the world, there is no heart for me like yours."
+            </div>
+        </div>
+    </div>
+    
+    <div class="hearts" id="hearts"></div>
+    
+    <script>
+        // GIFs and messages for different stages
+        const stages = [
+            {
+                gif: "https://media.giphy.com/media/LnKonfpQ44fNvuGLkA/giphy.gif",
+                message: "Do you love me? 💕",
+                quote: "\"In all the world, there is no heart for me like yours.\""
+            },
+            {
+                gif: "img/gif_2.gif",
+                message: "Please think again. 🙄",
+                quote: "\"The greatest happiness is knowing that you are loved.\""
+            },
+            {
+                gif: "img/gif_3.gif",
+                message: "Ek Aur Baar Soch Lo? 🥺",
+                quote: "\"Love is when the other person's happiness is more important than your own.\""
+            },
+            {
+                gif: "img/gif_4.gif",
+                message: "Baby Man Jao Na ! Kitna Bhav Khaogi ? 😭",
+                quote: "\"You know you're in love when reality is better than your dreams.\""
+            },
+            {
+                gif: "img/gif_4.gif",
+                message: "Last chance! Don't break my heart 💔",
+                quote: "\"If I know what love is, it is because of you.\""
+            }
+        ];
+        
+        const finalStage = {
+            gif: "img/gif_5.gif",
+            message: "I knew It ! You love me a Lot! 😘",
+            quote: "\"I love you not only for what you are, but for what I am when I am with you.\""
+        };
+        
+        // Love quotes
+        const loveQuotes = [
+            "\"Love is composed of a single soul inhabiting two bodies.\"",
+            "\"Being deeply loved gives you strength, while loving gives you courage.\"",
+            "\"The best thing to hold onto in life is each other.\"",
+            "\"Love is not finding someone to live with. It's finding someone you can't live without.\"",
+            "\"To love and be loved is to feel the sun from both sides.\"",
+            "\"Come live in my heart and pay no rent.\"",
+            "\"I love you not because of who you are, but because of who I am when I am with you.\""
+        ];
+        
+        let currentStage = 0;
+        const loveGif = document.getElementById('loveGif');
+        const message = document.getElementById('message');
+        const quoteBox = document.getElementById('quoteBox');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const heartsContainer = document.getElementById('hearts');
+        const bgHeartsContainer = document.getElementById('bgHearts');
+        const reloadBtn = document.getElementById('reloadBtn');
+        
+        // Reload button functionality
+        reloadBtn.addEventListener('click', function() {
+            location.reload();
+        });
+        
+        // Create background floating hearts
+        function createBackgroundHearts() {
+            const heartCount = 15;
+            const heartEmojis = ['❤️', '💖', '💗', '💓', '💕', '💞', '💘','🌹'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('bg-heart');
+                heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.opacity = Math.random() * 0.3 + 0.1;
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                bgHeartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Function to update content based on stage
+        function updateStage() {
+            loveGif.src = stages[currentStage].gif;
+            message.innerHTML = stages[currentStage].message;
+            quoteBox.innerHTML = stages[currentStage].quote;
+        }
+        
+        // Function for final yes response
+        function showFinalStage() {
+            loveGif.src = finalStage.gif;
+            message.innerHTML = finalStage.message;
+            quoteBox.innerHTML = finalStage.quote;
+            noBtn.style.display = 'none';
+            createHearts();
+        }
+        
+        // Create falling hearts animation
+        function createHearts() {
+            heartsContainer.style.display = 'block';
+            
+            // Create multiple hearts
+            const heartCount = 100;
+            const heartEmojis = ['❤️', '💖', '💗', '💓', '🌹', '💞', '💘', '😍', '😘','🥰','👄'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 3) + 2 + 's';
+                    heart.style.fontSize = (Math.random() * 20) + 15 + 'px';
+                    heartsContainer.appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }, i * 50);
+            }
+        }
+        
+        // Make the No button dodge with animation - Improved version
+        function dodgeNoButton() {
+            const buttonWidth = noBtn.offsetWidth;
+            const buttonHeight = noBtn.offsetHeight;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Ensure the button stays within visible area and not hidden behind containers
+            // Add padding to avoid edge positions
+            const padding = 20;
+            let newX = Math.floor(Math.random() * (viewportWidth - buttonWidth - (2 * padding))) + padding;
+            let newY = Math.floor(Math.random() * (viewportHeight - buttonHeight - (2 * padding))) + padding;
+            
+            // Ensure the button isn't positioned over the container
+            const containers = document.querySelectorAll('.container, .quote-container, header');
+            let validPosition = false;
+            
+            // Try up to 10 times to find a valid position
+            let attempts = 0;
+            while (!validPosition && attempts < 10) {
+                validPosition = true;
+                
+                for (const container of containers) {
+                    const rect = container.getBoundingClientRect();
+                    
+                    // Check if button would overlap with container
+                    if (
+                        newX < rect.right && 
+                        newX + buttonWidth > rect.left && 
+                        newY < rect.bottom && 
+                        newY + buttonHeight > rect.top
+                    ) {
+                        validPosition = false;
+                        newX = Math.floor(Math.random() * (viewportWidth - buttonWidth - (2 * padding))) + padding;
+                        newY = Math.floor(Math.random() * (viewportHeight - buttonHeight - (2 * padding))) + padding;
+                        break;
+                    }
+                }
+                
+                attempts++;
+            }
+            
+            // Add moving-button class if not already added
+            if (!noBtn.classList.contains('moving-button')) {
+                noBtn.classList.add('moving-button');
+            }
+            
+            // Set the button position
+            noBtn.style.position = 'fixed';
+            noBtn.style.top = newY + 'px';
+            noBtn.style.left = newX + 'px';
+            
+            // Ensure button is always on top and visible
+            noBtn.style.zIndex = "1000";
+        }
+        
+        // Setup dodging behavior based on mouse/touch proximity
+        function setupDodgingBehavior() {
+            // Track mouse movement near the button
+            document.addEventListener('mousemove', function(e) {
+                if (currentStage >= 4) {
+                    const rect = noBtn.getBoundingClientRect();
+                    const mouseX = e.clientX;
+                    const mouseY = e.clientY;
+                    
+                    // Calculate distance between mouse and button center
+                    const buttonCenterX = rect.left + rect.width / 2;
+                    const buttonCenterY = rect.top + rect.height / 2;
+                    const distance = Math.sqrt(
+                        Math.pow(mouseX - buttonCenterX, 2) + 
+                        Math.pow(mouseY - buttonCenterY, 2)
+                    );
+                    
+                    // If mouse gets within 100px of the button, move it
+                    if (distance < 100) {
+                        dodgeNoButton();
+                    }
+                }
+            });
+            
+            // Also dodge on click attempts
+            noBtn.addEventListener('mousedown', function(e) {
+                if (currentStage >= 4) {
+                    e.preventDefault();
+                    dodgeNoButton();
+                }
+            });
+            
+            // For mobile
+            noBtn.addEventListener('touchstart', function(e) {
+                if (currentStage >= 4) {
+                    e.preventDefault();
+                    dodgeNoButton();
+                }
+            });
+        }
+        
+        // Yes button click handler
+        yesBtn.addEventListener('click', function() {
+            showFinalStage();
+        });
+        
+        // No button click handler
+        noBtn.addEventListener('click', function() {
+            currentStage++;
+            
+            if (currentStage >= 4) {
+                // After 4 no clicks, make the button dodge
+                setupDodgingBehavior();
+                dodgeNoButton(); // Move it immediately after the 4th click
+            } else {
+                updateStage();
+            }
+        });
+        
+        // Initialize
+        createBackgroundHearts();
+        setupDodgingBehavior(); // Setup the behavior from the start but it won't activate until after 4 clicks
+    </script>
+</body>
+</html>
